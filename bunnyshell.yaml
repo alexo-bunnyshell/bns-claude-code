@@ -1,0 +1,36 @@
+kind: Environment
+name: claude-code
+type: primary
+environmentVariables:
+    ANTHROPIC_API_KEY: 'your-api-key-here'
+components:
+    -
+        kind: Application
+        name: workspace
+        gitRepo: 'https://github.com/alexo-bunnyshell/bns-claude-code.git'
+        gitBranch: main
+        gitApplicationPath: /
+        dockerCompose:
+            build:
+                context: .
+                dockerfile: .docker/Dockerfile
+                target: dev
+            environment:
+                ANTHROPIC_API_KEY: '{{ env.vars.ANTHROPIC_API_KEY }}'
+            ports:
+                - '7681:7681'
+        hosts:
+            -
+                hostname: 'terminal-{{ env.base_domain }}'
+                path: /
+                servicePort: 7681
+        volumes:
+            -
+                name: workspace-data
+                mount: /workspace
+                subPath: ''
+volumes:
+    -
+        name: workspace-data
+        size: 5Gi
+        type: disk
