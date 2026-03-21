@@ -1,0 +1,14 @@
+name: Claude Code Workspace
+description: A cloud workspace with Anthropic's Claude Code CLI pre-installed. Includes a web-based terminal (ttyd) for browser access and persistent storage for your projects.
+tags: [ ai, claude, anthropic, cli, coding-agent ]
+icons: [ nodejs ]
+categories: [ ai/ml ]
+stack:
+  packages:
+    - name: Node.js
+      version: '22'
+    - name: Claude Code
+      version: 'latest'
+    - name: ttyd
+      version: '1.7.7'
+discoverable: true
